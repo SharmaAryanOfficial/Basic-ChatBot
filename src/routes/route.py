@@ -1,8 +1,13 @@
 from fastapi import APIRouter
-from src.handlers.handler import hello
+from src.handlers.handler import chat_agent_handler
+from src.agents.chat_agent.states.chat_agent_state import ChatAgentState
+
+
 router = APIRouter()
 
 
-@router.get("/")
-def hello_route():
-    return hello()
+@router.post("/chat")
+def chat_agent_route(message: str)-> dict[str, str]:
+    """
+    """
+    return chat_agent_handler(message=message)
