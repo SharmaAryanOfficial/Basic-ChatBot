@@ -14,5 +14,5 @@ def chat(state: ChatAgentState) -> ChatAgentState:
         model='llama-3.1-8b-instant',
         api_key=GROQ_API_KEY
     )
-    answer = model.invoke([state['messages']])
+    answer = model.invoke(state['messages'])
     return {'messages': [answer]}

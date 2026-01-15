@@ -7,7 +7,7 @@ router = APIRouter()
 
 
 @router.post("/chat")
-def chat_agent_route(message: str)-> dict[str, str]:
+def chat_agent_route(message: str)-> ChatAgentState:
     """
     """
     return chat_agent_handler(message=message)

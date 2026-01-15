@@ -12,6 +12,4 @@ __pycache__/
 # IDE files
 .idea/
 
-# Practice / scratch files
-langgraph_practice.ipynb
-llm_langchain_practice.py
+

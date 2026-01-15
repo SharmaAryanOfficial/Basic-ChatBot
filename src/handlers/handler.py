@@ -7,4 +7,13 @@ graph = create_chat_agent_graph()
 def chat_agent_handler(message : str) -> dict[str, str]:
     """
     """
-    return graph.invoke({'messages': [HumanMessage(content = message)]}) #{'messages': answer from AI}
+    return graph.invoke(
+        input = {
+            'messages': [HumanMessage(content = message)]
+        },
+        config={
+            'configurable':{
+                'thread_id': '1'
+                }
+        }
+    ) #{'messages': answer from AI}
