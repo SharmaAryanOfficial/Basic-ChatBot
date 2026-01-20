@@ -2,7 +2,8 @@ from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
 from src.handlers.handler import chat_agent_handler, get_all_threads_handler, chat_history_handler
 from src.agents.chat_agent.states.chat_agent_state import ChatAgentState
-
+from fastapi.responses import StreamingResponse
+from src.handlers.handler import chat_streaming_handler
 
 router = APIRouter()
 
@@ -45,3 +46,10 @@ def get_chat_history(thread_id: str) -> ChatAgentState | dict[None, None]:
     :type thread_id: str
     """
     return chat_history_handler(thread_id = thread_id)
+
+@router.get("/chat/stream/{thread_id}")
+def chat_stream(thread_id: str, message: str):
+    return StreamingResponse(
+        chat_streaming_handler(thread_id, message),
+        media_type="text/plain"
+    )
