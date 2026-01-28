@@ -4,11 +4,12 @@ from src.agents.chat_agent.states.chat_agent_state import ChatAgentState
 from typing import Iterator
 
 
-graph = create_chat_agent_graph()
 
 def chat_agent_handler(thread_id: str, message : str) -> ChatAgentState:
     """
     """
+    graph = create_chat_agent_graph()
+
     return graph.invoke(
         input = {
             'messages': [HumanMessage(content = message)]
@@ -31,6 +32,8 @@ def chat_streaming_handler(thread_id : str, message : str) -> Iterator[str]:
     :return: Description
     :rtype: Any
     """
+    graph = create_chat_agent_graph()
+
 
     for chunk, metadata in graph.stream(
         input={
@@ -50,7 +53,10 @@ def chat_streaming_handler(thread_id : str, message : str) -> Iterator[str]:
 def get_all_threads_handler() ->list[str | None]:
     """
     Docstring for get_all_threads_handler
+
     """
+    graph = create_chat_agent_graph()
+
     all_checkpoints =  graph.checkpointer.list(config={})
 
     threads = set()
@@ -64,6 +70,9 @@ def chat_history_handler(thread_id: str) -> ChatAgentState | dict[None, None]:
     """
     Docstring for chat_history_handler
     """
+
+    graph = create_chat_agent_graph()
+
     return graph.get_state(config={
         'configurable': {
             'thread_id': thread_id
